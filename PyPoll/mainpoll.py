@@ -16,18 +16,30 @@ with open(csvpath_poll, newline='') as csvfile_poll:
 
     for row in csvreaderpoll:
 
-        if row[3] == "Khan":
+        if row[2] == "Khan":
              khan_total += 1
-        elif row[3] == "Correy":
+        elif row[2] == "Correy":
             correy_total += 1
-        elif row[3] == "Li":
+        elif row[2] == "Li":
             li_total += 1
-        elif row[3] == "O'Tooley":
+        elif row[2] == "O'Tooley":
             otooley_total += 1
-
+        
+    # dictionary of each candidate and the number of votes they received
     vote_dict.update({"Khan":khan_total,
      "Correy": correy_total,
      "Li": li_total,
-     "O' Tooley": otooley_total})
+     "O' Tooley": otooley_total,
+    })
+    
+    total_votes = sum(vote_dict.values())
 
-     
+    khan_percent = round(vote_dict["Khan"]/total_votes,2)
+    correy_percent = round(vote_dict["Correy"]/total_votes,2)
+    li_percent = round(vote_dict["Li"]/total_votes,2)
+    otooley_percent = round(vote_dict["O' Tooley"]/total_votes,2)
+
+    vote_listv = list(vote_dict.values())
+    vote_listk = list(vote_dict.keys())
+    
+    winner = vote_listk[vote_listv.index(max(vote_listv))]
